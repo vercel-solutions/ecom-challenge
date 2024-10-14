@@ -5,6 +5,8 @@ import {Button} from "@/components/ui/button";
 import {Card, CardContent} from "@/components/ui/card";
 import api from "@/api";
 
+export const dynamic = "force-dynamic";
+
 export default async function ProductDetailPage({params}: {params: {id: string}}) {
   const product = await api.product.get(params.id);
   const relatedProducts = await api.product.list(product.category);

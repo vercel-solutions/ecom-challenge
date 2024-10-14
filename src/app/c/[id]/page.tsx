@@ -4,6 +4,8 @@ import Link from "next/link";
 import {Card, CardContent, CardFooter} from "@/components/ui/card";
 import api from "@/api";
 
+export const dynamic = "force-dynamic";
+
 export default async function ProductListingPage() {
   const products = await api.product.list();
 

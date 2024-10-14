@@ -221,9 +221,13 @@ const CAMPAIGNS = [
   },
 ];
 
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 export default {
   campaign: {
     async list(bucket?: string) {
+      await sleep(Math.random() * 1000);
+
       let campaigns = structuredClone(CAMPAIGNS);
 
       if (bucket) {
@@ -235,6 +239,8 @@ export default {
   },
   product: {
     async get(id: string) {
+      await sleep(Math.random() * 1000);
+
       const product = PRODUCTS.find((product) => product.id === id);
 
       if (!product) {
@@ -244,6 +250,8 @@ export default {
       return product;
     },
     async list(category?: string) {
+      await sleep(Math.random() * 1000);
+
       let products = structuredClone(PRODUCTS);
 
       if (category) {

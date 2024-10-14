@@ -3,6 +3,8 @@ import Image from "next/image";
 import {Button} from "@/components/ui/button";
 import api from "@/api";
 
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const campaigns = await api.campaign.list();
 
