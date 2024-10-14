@@ -7,8 +7,9 @@ import api from "@/api";
 
 export const dynamic = "force-dynamic";
 
-export default async function ProductDetailPage({params}: {params: {id: string}}) {
-  const product = await api.product.get(params.id);
+export default async function ProductDetailPage({params}: {params: Promise<{id: string}>}) {
+  const {id} = await params;
+  const product = await api.product.get(id);
   const relatedProducts = await api.product.list(product.category);
 
   return (
