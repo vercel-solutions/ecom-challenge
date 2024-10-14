@@ -15,7 +15,6 @@ export default async function ProductDetailPage({params}: {params: {id: string}}
     <div className="container flex-1 px-4 py-4 md:px-6 md:py-12">
       <div className="rounded-lgshadow-xl grid gap-8 overflow-hidden">
         <div className="gap-8 md:flex">
-          {/* Product Images */}
           <div className="md:w-1/2">
             <div className="relative h-96">
               <Image
@@ -27,8 +26,6 @@ export default async function ProductDetailPage({params}: {params: {id: string}}
               />
             </div>
           </div>
-
-          {/* Product Info */}
           <div className="md:w-1/2">
             <h1 className="mb-4 text-3xl font-bold">{product.name}</h1>
             <div className="mb-4 flex items-center">
@@ -66,8 +63,6 @@ export default async function ProductDetailPage({params}: {params: {id: string}}
           </div>
         </div>
       </div>
-
-      {/* Related Products */}
       <div className="mt-12">
         <h2 className="mb-6 text-2xl font-bold">Related Products</h2>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
