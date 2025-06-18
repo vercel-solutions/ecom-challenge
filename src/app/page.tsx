@@ -3,8 +3,9 @@ import Image from "next/image";
 import {Button} from "@/components/ui/button";
 import api from "@/api";
 
-export default async function HomePage() {
-  const campaigns = await api.campaign.list();
+export default async function HomePage({ searchParams }: any) {
+  const { bucket } = await searchParams
+  const campaigns = await api.campaign.list(bucket);
 
   return (
     <main className="flex-1">
