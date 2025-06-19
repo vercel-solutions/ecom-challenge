@@ -5,7 +5,12 @@ import {Button} from "@/components/ui/button";
 import {Card, CardContent} from "@/components/ui/card";
 import api from "@/api";
 
-export const dynamic = "force-dynamic";
+export async function generateStaticParams() {
+  const products = await api.product.list();
+  const moreThanHundredReviews = products.filter(({ reviews }) => reviews >= 100).map(({ id }) => ({ id }));
+
+  return moreThanHundredReviews;
+}
 
 export default async function ProductDetailPage({params}: {params: Promise<{id: string}>}) {
   const {id} = await params;
