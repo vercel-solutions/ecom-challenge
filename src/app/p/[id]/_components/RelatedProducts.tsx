@@ -4,7 +4,10 @@ import api from "@/api";
 
 export const RelatedProducts = async ({ product }: { product: any}) => {
   const relatedProducts = await(async () => {
+    // Timeout included to exaggerate load time for demo purposes
+    // Timeout is not required
     await (new Promise((resolve) => setTimeout(resolve, 2000)))
+
     return await api.product.list(product.category);
   })();
 
