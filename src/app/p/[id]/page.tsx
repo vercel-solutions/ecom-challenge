@@ -2,8 +2,9 @@ import {Star, Truck, RefreshCcw, ShieldCheck} from "lucide-react";
 import Image from "next/image";
 
 import {Button} from "@/components/ui/button";
-import {Card, CardContent} from "@/components/ui/card";
 import api from "@/api";
+import { Suspense } from "react";
+import { RelatedProducts } from "./_components/RelatedProducts";
 
 export async function generateStaticParams() {
   const products = await api.product.list();
@@ -15,7 +16,6 @@ export async function generateStaticParams() {
 export default async function ProductDetailPage({params}: {params: Promise<{id: string}>}) {
   const {id} = await params;
   const product = await api.product.get(id);
-  const relatedProducts = await api.product.list(product.category);
 
   return (
     <div className="container flex-1 px-4 py-4 md:px-6 md:py-12">
@@ -49,7 +49,9 @@ export default async function ProductDetailPage({params}: {params: Promise<{id: 
               </div>
               <span className="ml-2 text-sm">({product.reviews} reviews)</span>
             </div>
-            <p className="mb-4 text-2xl font-bold">${product.price.toFixed(2)}</p>
+            <p className="mb-4 text-2xl font-bold">
+              ${product.price.toFixed(2)}
+            </p>
             <p className="mb-6">{product.description}</p>
             <Button className="mb-4 w-full">Add to Cart</Button>
             <div className="grid grid-cols-2 gap-4 text-sm">
@@ -72,17 +74,9 @@ export default async function ProductDetailPage({params}: {params: Promise<{id: 
       <div className="mt-12">
         <h2 className="mb-6 text-2xl font-bold">Related Products</h2>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {relatedProducts.slice(0, 3).map((product) => (
-            <Card key={product.id}>
-              <CardContent className="p-4">
-                <div className="relative mb-4 h-48">
-                  <Image alt={product.name} layout="fill" objectFit="contain" src={product.image} />
-                </div>
-                <h3 className="mb-2 text-lg font-semibold">{product.name}</h3>
-                <p className="">${product.price.toFixed(2)}</p>
-              </CardContent>
-            </Card>
-          ))}
+          <Suspense fallback={<div>Loading...</div>}>
+            <RelatedProducts product={product}/>
+          </Suspense>
         </div>
       </div>
     </div>
