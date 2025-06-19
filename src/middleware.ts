@@ -14,14 +14,7 @@ export function middleware(req: NextRequest) {
   const cookie = req.cookies.get(COOKIE_NAME);
   const bucket = cookie?.value || randomChoice;
 
-  const url = req.nextUrl.clone();
-  const searchParams = url.searchParams;
-
-  searchParams.set("bucket", bucket);
-
-  url.search = searchParams.toString();
-
-  const res = NextResponse.rewrite(url);
+  const res = NextResponse.rewrite(new URL(`/${bucket}`, req.url));
 
   if (!cookie) {
     res.cookies.set(COOKIE_NAME, bucket);
