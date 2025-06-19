@@ -17,7 +17,12 @@ export const LiveReviews = ({ id }: { id: string }) => {
     const interval = setInterval(fetchData, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [reviews]);
+
+
+  if (!reviews) {
+    return <span className="ml-2 text-sm">Loading reviews...</span>;
+  }
 
   return <span className="ml-2 text-sm">({reviews} reviews)</span>;
 };
