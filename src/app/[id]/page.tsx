@@ -3,10 +3,15 @@ import Image from "next/image";
 import {Button} from "@/components/ui/button";
 import api from "@/api";
 
-export const dynamic = "force-dynamic";
+export const dynamicParams = false;
 
-export default async function HomePage() {
-  const campaigns = await api.campaign.list();
+export async function generateStaticParams() {
+  return [{ id: 'a' },{ id: 'b' }, { id: 'c' }];
+}
+
+export default async function HomePage({ params }: any) {
+  const { id } = await params
+  const campaigns = await api.campaign.list(id);
 
   return (
     <main className="flex-1">
