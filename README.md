@@ -14,6 +14,10 @@ Our customer ACME Store has a simple e-commerce website that includes:
 4. Everything in the PDP page is static except the related products.
 5. Customer said that products above 50 USD should have reviews updated in real time (or at least every 10 seconds).
 
+## Notes
+
+- All requests have a synthetic delay of ~ 1 second
+
 ## Recommendations
 
 - Always take performance in mind
