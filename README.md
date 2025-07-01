@@ -16,7 +16,7 @@ Our customer ACME Store has a simple e-commerce website that includes:
 
 ## Notes
 
-- All requests have a synthetic delay of ~ 1 second
+- All requests are mocked and have a synthetic delay of ~ 1 second
 
 ## Recommendations
 
