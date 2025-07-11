@@ -221,6 +221,12 @@ const CAMPAIGNS = [
   },
 ];
 
+export const getRandomCampaignBucket = () => {
+  const campaigns = CAMPAIGNS.map((campaign) => campaign.bucket);
+
+  return campaigns[Math.floor(Math.random() * campaigns.length)];
+};
+
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export default {

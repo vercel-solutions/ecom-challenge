@@ -1,16 +1,25 @@
-import {Star, Truck, RefreshCcw, ShieldCheck} from "lucide-react";
+import {Truck, RefreshCcw, ShieldCheck} from "lucide-react";
 import Image from "next/image";
+import {Suspense} from "react";
 
 import {Button} from "@/components/ui/button";
-import {Card, CardContent} from "@/components/ui/card";
 import api from "@/api";
+import {RelatedProducts, RelatedProductsSkeleton} from "@/components/related-products";
+import {Reviews} from "@/components/reviews";
 
-export const dynamic = "force-dynamic";
+export const experimental_ppr = true;
+
+export const generateStaticParams = async () => {
+  const products = await api.product.list();
+
+  const highlyReviewedProducts = products.filter((product) => product.reviews >= 100);
+
+  return highlyReviewedProducts.map((product) => ({id: product.id}));
+};
 
 export default async function ProductDetailPage({params}: {params: Promise<{id: string}>}) {
   const {id} = await params;
   const product = await api.product.get(id);
-  const relatedProducts = await api.product.list(product.category);
 
   return (
     <div className="container flex-1 px-4 py-4 md:px-6 md:py-12">
@@ -30,19 +39,11 @@ export default async function ProductDetailPage({params}: {params: Promise<{id: 
           <div className="md:w-1/2">
             <h1 className="mb-4 text-3xl font-bold">{product.name}</h1>
             <div className="mb-4 flex items-center">
-              <div className="flex items-center">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className={`h-5 w-5 ${
-                      i < Math.floor(product.rating)
-                        ? "fill-current text-yellow-400"
-                        : "text-gray-300"
-                    }`}
-                  />
-                ))}
-              </div>
-              <span className="ml-2 text-sm">({product.reviews} reviews)</span>
+              <Reviews
+                initialProduct={product}
+                polling={product.price > 5}
+                productId={product.id}
+              />
             </div>
             <p className="mb-4 text-2xl font-bold">${product.price.toFixed(2)}</p>
             <p className="mb-6">{product.description}</p>
@@ -66,19 +67,9 @@ export default async function ProductDetailPage({params}: {params: Promise<{id: 
       </div>
       <div className="mt-12">
         <h2 className="mb-6 text-2xl font-bold">Related Products</h2>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {relatedProducts.slice(0, 3).map((product) => (
-            <Card key={product.id}>
-              <CardContent className="p-4">
-                <div className="relative mb-4 h-48">
-                  <Image alt={product.name} layout="fill" objectFit="contain" src={product.image} />
-                </div>
-                <h3 className="mb-2 text-lg font-semibold">{product.name}</h3>
-                <p className="">${product.price.toFixed(2)}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        <Suspense fallback={<RelatedProductsSkeleton />}>
+          <RelatedProducts category={product.category} />
+        </Suspense>
       </div>
     </div>
   );
