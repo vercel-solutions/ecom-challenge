@@ -3,12 +3,22 @@ import Image from "next/image";
 import {Button} from "@/components/ui/button";
 import api from "@/api";
 
-export default async function HomePage() {
-  const campaigns = await api.campaign.list();
+export async function generateStaticParams() {
+  const allCampaigns = await api.campaign.list();
+
+  return allCampaigns.map((campaign) => {
+    return {campaign: campaign.bucket};
+  });
+}
+
+export default async function CampaignHomePage({params}: {params: Promise<{campaign: string}>}) {
+  const {campaign} = await params;
+
+  const campaignProps = await api.campaign.list(campaign);
 
   return (
     <main className="flex-1">
-      {campaigns.map((campaign, index) => (
+      {campaignProps.map((campaign, index) => (
         <section
           key={campaign.title}
           className={`w-full ${index % 2 === 1 ? "bg-gray-500/5 dark:bg-gray-800" : ""} py-12 md:py-24 lg:py-32`}
