@@ -20,10 +20,10 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
                 <span className="font-bold">ACME Store</span>
               </Link>
               <nav className="flex items-center space-x-2 text-xs font-medium sm:space-x-4 sm:text-sm">
-                <Link href="/c/products">Shirts</Link>
-                <Link href="/c/categories">Hoodies</Link>
-                <Link href="/c/deals">Summer</Link>
-                <Link href="/c/about">Winter</Link>
+                <Link href="/category/1">Shirts</Link>
+                <Link href="/category/2">Hoodies</Link>
+                <Link href="/category/3">Summer</Link>
+                <Link href="/category/4">Winter</Link>
               </nav>
             </div>
           </div>

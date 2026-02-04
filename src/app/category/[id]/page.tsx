@@ -14,7 +14,7 @@ export default async function ProductListingPage() {
       <h1 className="mb-8 text-3xl font-bold">Our Products</h1>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {products.map((product) => (
-          <Link key={product.id} href={`/p/${product.id}`}>
+          <Link key={product.id} href={`/product/${product.id}`}>
             <Card className="flex flex-col overflow-hidden bg-gray-500/5 transition-shadow duration-200 hover:shadow-lg">
               <div className="relative w-full pt-[75%]">
                 <Image
