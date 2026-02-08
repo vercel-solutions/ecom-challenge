@@ -183,7 +183,7 @@ const CAMPAIGNS = [
     description: "Discover our latest summer styles. Light, breezy, and perfect for the season.",
     imageAlt: "Summer Collection",
     bucket: "a",
-    imageSrc: "/placeholder.svg?height=550&width=550",
+    imageSrc: "/placeholder.svg",
     buttons: [
       {text: "Shop Now", variant: "default"},
       {text: "Learn More", variant: "outline"},
@@ -195,7 +195,7 @@ const CAMPAIGNS = [
       "Get ready for cooler days with our upcoming fall collection. Cozy sweaters and stylish boots await.",
     imageAlt: "Fall Preview",
     bucket: "a",
-    imageSrc: "/placeholder.svg?height=550&width=550",
+    imageSrc: "/placeholder.svg",
     buttons: [{text: "Explore Fall Collection", variant: "outline"}],
   },
   {
@@ -203,7 +203,7 @@ const CAMPAIGNS = [
     description:
       "Tis the season to be stylish! Discover our festive collection and find the perfect gifts for your loved ones.",
     imageAlt: "Holiday Special",
-    imageSrc: "/placeholder.svg?height=550&width=550",
+    imageSrc: "/placeholder.svg",
     bucket: "b",
     buttons: [
       {text: "Shop Holiday Collection", variant: "default"},
@@ -216,7 +216,7 @@ const CAMPAIGNS = [
     description:
       "Refresh your wardrobe with our vibrant spring collection. Embrace the season of new beginnings.",
     imageAlt: "Spring Renewal",
-    imageSrc: "/placeholder.svg?height=550&width=550",
+    imageSrc: "/placeholder.svg",
     buttons: [{text: "View Spring Styles", variant: "outline"}],
   },
 ];
