@@ -17,12 +17,7 @@ export default async function ProductListingPage() {
           <Link key={product.id} href={`/product/${product.id}`}>
             <Card className="flex flex-col overflow-hidden bg-gray-500/5 transition-shadow duration-200 hover:shadow-lg">
               <div className="relative w-full pt-[75%]">
-                <Image
-                  alt={product.name}
-                  layout="fill"
-                  objectFit="cover"
-                  src="/placeholder.svg?height=300&width=400"
-                />
+                <Image alt={product.name} layout="fill" objectFit="cover" src="/placeholder.svg" />
               </div>
               <CardContent className="grid flex-grow gap-1 p-4">
                 <h2 className="text-lg font-semibold leading-5">{product.name}</h2>
